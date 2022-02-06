@@ -18,6 +18,14 @@ function Todo() {
     }
   }
 
+  function handleDoubleClick(event) {
+    console.log(event);
+    const filteredItems = toDoItems.filter(
+      (item) => item !== event.target.innerText
+    );
+    setToDoItems(filteredItems);
+  }
+
   return (
     <div>
       <h1>To do list</h1>
@@ -33,9 +41,13 @@ function Todo() {
         </button>
       </form>
       <div>
+        <h2>Items</h2>
+        <span>(double click to remove)</span>
         <ul>
-          {toDoItems.map((item) => (
-            <li>{item}</li>
+          {toDoItems.map((item, index) => (
+            <li onDoubleClick={handleDoubleClick} id={index}>
+              {item}
+            </li>
           ))}
         </ul>
       </div>
